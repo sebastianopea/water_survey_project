@@ -1,0 +1,11 @@
+features che il progetto deve avere per questo progetto:
+
+database
+autenticazione
+pagina responsive
+
+opzionali:
+
+possibilità di creare un nuovo account
+invio delle mail o immagini
+dashboard di amministrazione

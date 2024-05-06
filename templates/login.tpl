@@ -9,5 +9,6 @@
 </head>
 <body>
     <h1>Water survey</h1>
+    <a href="index.php?signUp">Sing Up</a>
 </body>
 </html>
