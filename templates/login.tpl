@@ -9,6 +9,11 @@
 </head>
 <body>
     <h1>Water survey</h1>
-    <a href="index.php?signUp">Sing Up</a>
+    <form action="" method="post">
+        <input type="text" placeholder="Username">
+        <input type="password" placeholder="Password">
+        <input type="submit" value="Log in">
+    </form>
+    <label> or </label><a href="index.php?signUp">Sing Up</a>
 </body>
 </html>

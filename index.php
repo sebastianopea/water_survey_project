@@ -20,6 +20,12 @@ if (isset($_GET)){
         ]);
         exit(0);
     }
+    if (isset($_GET['login'])){
+        echo $template->render('login', [
+
+        ]);
+        exit(0);
+    }
 }
 if (isset($_POST)){
     if (isset($_POST['signUp'])){
