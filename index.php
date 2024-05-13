@@ -30,11 +30,11 @@ if (isset($_GET)){
 if (isset($_POST)){
     if (isset($_POST['signUp'])){
         $name = $_POST['name'];
-        $name = $_POST['surname'];
-        $name = $_POST['username'];
-        $name = $_POST['email'];
-        $name = $_POST['password'];
-        $name = $_POST['dateOfBirth'];
+        $surname = $_POST['surname'];
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $dateOfBirth = $_POST['dateOfBirth'];
 
 
         if (!\Model\UserRepository::createNewUser($username, $email, $password, $name, $surname, $dateOfBirth) || strlen($password) < 8) {
