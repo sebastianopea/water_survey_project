@@ -8,13 +8,8 @@ use Model\SurveyRepository;
 use Util\Authenticator;
 
 $template = new Engine('templates','tpl');
-$user = Authenticator::getUser();
-$name = $surname = $username = $email = $password = $dateOfBirth = null;
 
-if ($user == null){
-    echo $template->render('Login');
-    exit(0);
-}
+$name = $surname = $username = $email = $password = $dateOfBirth = null;
 
 if (isset($_GET)){
     if (isset($_GET['signUp'])){
@@ -25,8 +20,8 @@ if (isset($_GET)){
         ]);
         exit(0);
     }
-    if (isset($_GET['survey'])){
-        echo $template->render('survey', [
+    if (isset($_GET['login'])){
+        echo $template->render('login', [
 
         ]);
         exit(0);
@@ -35,11 +30,11 @@ if (isset($_GET)){
 if (isset($_POST)){
     if (isset($_POST['signUp'])){
         $name = $_POST['name'];
-        $name = $_POST['surname'];
-        $name = $_POST['username'];
-        $name = $_POST['email'];
-        $name = $_POST['password'];
-        $name = $_POST['dateOfBirth'];
+        $surname = $_POST['surname'];
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $dateOfBirth = $_POST['dateOfBirth'];
 
 
         if (!\Model\UserRepository::createNewUser($username, $email, $password, $name, $surname, $dateOfBirth) || strlen($password) < 8) {
@@ -56,7 +51,6 @@ if (isset($_POST)){
         }
     }
 }
-
 
 echo $template->render('login', [
 

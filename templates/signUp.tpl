@@ -18,5 +18,6 @@
         <input type="date" placeholder="Birth date" value="<?=$dateOfBirth?>">
         <input type="submit" name="Send">
     </form>
+    <label> if you already have an account <a href="index.php?login">Log in</a></label>
 </body>
 </html>
