@@ -8,8 +8,13 @@ use Model\SurveyRepository;
 use Util\Authenticator;
 
 $template = new Engine('templates','tpl');
-
+$user = Authenticator::getUser();
 $name = $surname = $username = $email = $password = $dateOfBirth = null;
+
+if ($user == null){
+    echo $template->render('Login');
+    exit(0);
+}
 
 if (isset($_GET)){
     if (isset($_GET['signUp'])){
@@ -17,6 +22,12 @@ if (isset($_GET)){
             'name' => $username,
             'surname' => $surname,
             'dateOfBirth' => $dateOfBirth,
+        ]);
+        exit(0);
+    }
+    if (isset($_GET['survey'])){
+        echo $template->render('survey', [
+
         ]);
         exit(0);
     }
@@ -45,6 +56,7 @@ if (isset($_POST)){
         }
     }
 }
+
 
 echo $template->render('login', [
 

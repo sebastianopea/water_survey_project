@@ -5,11 +5,9 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>water survey</title>
 </head>
 <body>
-    <h1>Water survey</h1>
-    <a href="index.php?signUp">Sing Up</a>
-    <a href="index.php?survey">Compile our survey</a>
+    <H1>ciao</H1>
 </body>
 </html>
