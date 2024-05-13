@@ -41,7 +41,7 @@ class UserRepository{
             return false;
         return true;
     }
-    public static function creteNewUser($username, $email, $password, $name, $surname, $dateOfBirth):bool
+    public static function createNewUser($username, $email, $password, $name, $surname, $dateOfBirth):bool
     {
          if (self::existUsername($username, $email))
              return false;
@@ -59,6 +59,22 @@ class UserRepository{
              'dateOfBirth' => $dateOfBirth,
          ]);
          return true;
+    }
+    public static function checkUserExists(string $username): ?array {
+        $pdo = Connection::getInstance();
+        $sql = 'SELECT * FROM spese.utente WHERE username=:username';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'username' => $username
+        ]);
+
+        // Se non esiste un utente con lo stesso nome utente, restituisci null
+        if ($stmt->rowCount() == 0) {
+            return null;
+        }
+
+        // Se esiste un utente con lo stesso nome utente, restituisci i dati dell'utente
+        return $stmt->fetch();
     }
 
 }

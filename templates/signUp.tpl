@@ -9,14 +9,14 @@
 </head>
 <body>
     <h2>Create a new account</h2>
-    <form name="signUp" method="post">
-        <input type="text" placeholder="E-mail">
-        <input type="text" placeholder="Username">
-        <input type="text" placeholder="Password">
-        <input type="text" placeholder="Name" value="<?=$name?>">
-        <input type="text" placeholder="Surname" value="<?=$surname?>">
-        <input type="date" placeholder="Birth date" value="<?=$dateOfBirth?>">
-        <input type="submit" name="Send">
+    <form class="form" action="index.php" method="post">
+        <input type="text" placeholder="E-mail" name="email">
+        <input type="text" placeholder="Username" name="username">
+        <input type="text" placeholder="Password" name="password">
+        <input type="text" placeholder="Name" value="<?=$name?>" name="name">
+        <input type="text" placeholder="Surname" value="<?=$surname?>" name="surname">
+        <input type="date" placeholder="Birth date" value="<?=$dateOfBirth?>" name="dateOfBirth">
+        <input type="submit" name="signUp">
     </form>
     <label> if you already have an account <a href="index.php?login">Log in</a></label>
 </body>
