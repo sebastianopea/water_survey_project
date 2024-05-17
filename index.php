@@ -21,6 +21,11 @@ if (isset($_GET)){
         ]);
         exit(0);
     }
+    if (isset($_GET['waterSurvey'])){
+        echo $template->render('survey', [
+        ]);
+        exit(0);
+    }
     if (isset($_GET['login'])){
         echo $template->render('login', [
 
@@ -38,7 +43,7 @@ if (isset($_POST['username'])){
         ]);
     }
     else {
-        echo $template->render('controlPanel' , [
+        echo $template->render('login' , [
             'successful' => false,
         ]);
     }

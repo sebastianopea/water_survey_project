@@ -15,5 +15,7 @@
         <input type="submit" value="Log in">
     </form>
     <label> or </label><a href="index.php?signUp">Sing Up</a>
+    <label> or </label><a href="index.php?waterSurvey">survey</a>
+
 </body>
 </html>
