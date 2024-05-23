@@ -62,7 +62,7 @@ class UserRepository{
     }
     public static function checkUserExists(string $username): ?array {
         $pdo = Connection::getInstance();
-        $sql = 'SELECT * FROM spese.utente WHERE username=:username';
+        $sql = 'SELECT * FROM user WHERE username=:username';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
             'username' => $username

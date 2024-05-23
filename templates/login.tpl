@@ -16,6 +16,8 @@
     </form>
     <label> or </label><a href="index.php?signUp">Sing Up</a>
     <label> or </label><a href="index.php?waterSurvey">survey</a>
+    <label> or </label><a href="index.php?dash">Dashboard</a>
+
 
 </body>
 </html>

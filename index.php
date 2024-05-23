@@ -3,6 +3,7 @@
 require_once 'vendor/autoload.php';
 require_once 'conf/config.php';
 
+
 use Model\UserRepository;
 use League\Plates\Engine;
 use Model\SurveyRepository;
@@ -10,7 +11,8 @@ use Util\Authenticator;
 
 $template = new Engine('templates','tpl');
 
-$name = $surname = $username = $email = $password = $dateOfBirth = null;
+$name = $surname = $username = $email = $password = $dateOfBirth = $tapWater1 = $tapWater2 = $tapWater3 = $filtrationSystem1 = $filtrationSystem2 = null;
+
 
 if (isset($_GET)){
     if (isset($_GET['signUp'])){
@@ -22,7 +24,19 @@ if (isset($_GET)){
         exit(0);
     }
     if (isset($_GET['waterSurvey'])){
+        $questions =Model\SurveyRepository::getQuestionsBySurveyId(1);
         echo $template->render('survey', [
+            'questions' =>$questions
+        ]);
+        exit(0);
+    }
+    if (isset($_GET['dash'])) {
+        echo $template->render('dashboard',[
+            'tapWater1' => $tapWater1,
+            'tapWater2' => $tapWater2,
+            'tapWater3' => $tapWater3,
+            'filtrationSystem1' => $filtrationSystem1,
+            'filtrationSystem2' => $filtrationSystem2,
         ]);
         exit(0);
     }
@@ -48,6 +62,16 @@ if (isset($_POST['username'])){
         ]);
     }
     exit(0);
+}
+if (isset($_POST['Submit_Survey'])){
+    $location = $_POST['location'];
+    $comments = $_POST['comments'];
+    $tapWater1 = $_POST['question_1'];
+    $tapWater2 = $_POST['question_2'];
+    $tapWater3 = $_POST['question_3'];
+    $filtrationSystem1 = $_POST['question_4'];
+    $filtrationSystem2 = $_POST['question_5'];
+    SurveyRepository::addAnswers($location, $comments, $tapWater1, $tapWater2, $tapWater3, $filtrationSystem1, $filtrationSystem2);
 }
 /*if (isset($_POST)){
     if (isset($_POST['signUp'])){
