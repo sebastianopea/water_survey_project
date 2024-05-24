@@ -4,17 +4,19 @@ namespace Model;
 use Util\Connection;
 
 class SurveyRepository{
-    public static function addAnsware($location, $comments, $question1, $question2, $question3, $question4){
+    public static function addAnswer($location, $comments, $tapWater1, $tapWater2, $tapWater3, $filtrationSystem1, $filtrationSystem2): void
+    {
         $pdo = Connection::getInstance();
         $sql = 'INSERT INTO options() VALUES()';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
             'location' => $location,
             'comments' => $comments,
-            'question1' => $question1,
-            'question2' => $question2,
-            'question3' => $question3,
-            'question4' => $question4
+            'tapWater1' => $tapWater1,
+            'tapWater2' => $tapWater2,
+            'tapWater3' => $tapWater3,
+            'filtrationSystem1' => $filtrationSystem1,
+            'filtrationSystem2' => $filtrationSystem2,
         ]);
     }
 

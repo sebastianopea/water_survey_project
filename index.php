@@ -48,31 +48,32 @@ if (isset($_GET)){
     }
 }
 if (isset($_POST)){
-if (isset($_POST['username'])){
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    if(Model\UserRepository::checkUserExists($username)==null){
-        Model\UserRepository::createNewUser($username, $email, $password, $name, $surname, $dateOfBirth);
-        echo $template->render('signUp' , [
-            'successful' => true,
-        ]);
+    if (isset($_POST['username'])){
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        if(Model\UserRepository::checkUserExists($username)==null){
+            Model\UserRepository::createNewUser($username, $email, $password, $name, $surname, $dateOfBirth);
+            echo $template->render('signUp' , [
+                'successful' => true,
+            ]);
+        }
+        else {
+            echo $template->render('login' , [
+                'successful' => false,
+            ]);
+        }
+        exit(0);
     }
-    else {
-        echo $template->render('login' , [
-            'successful' => false,
-        ]);
+    if (isset($_POST['Submit_Survey'])) {
+        $location = $_POST['location'];
+        $comments = $_POST['comments'];
+        $tapWater1 = $_POST['question_1'];
+        $tapWater2 = $_POST['question_2'];
+        $tapWater3 = $_POST['question_3'];
+        $filtrationSystem1 = $_POST['question_4'];
+        $filtrationSystem2 = $_POST['question_5'];
+        SurveyRepository::addAnswer($location, $comments, $tapWater1, $tapWater2, $tapWater3, $filtrationSystem1, $filtrationSystem2);
     }
-    exit(0);
-}
-if (isset($_POST['Submit_Survey'])){
-    $location = $_POST['location'];
-    $comments = $_POST['comments'];
-    $tapWater1 = $_POST['question_1'];
-    $tapWater2 = $_POST['question_2'];
-    $tapWater3 = $_POST['question_3'];
-    $filtrationSystem1 = $_POST['question_4'];
-    $filtrationSystem2 = $_POST['question_5'];
-    SurveyRepository::addAnswers($location, $comments, $tapWater1, $tapWater2, $tapWater3, $filtrationSystem1, $filtrationSystem2);
 }
 /*if (isset($_POST)){
     if (isset($_POST['signUp'])){
