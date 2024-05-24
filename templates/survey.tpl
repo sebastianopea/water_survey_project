@@ -8,6 +8,13 @@
     <title>water survey</title>
 </head>
 <body>
-    <H1>ciao</H1>
+    <h2>Questions</h2>
+    <?php foreach($questions as $q):?>
+        <p><?=$q['questionText']?></p><br>
+        <?php for($i = 0; $i < 6; $i++):?>
+            <input type="radio" name="<?=$q['questionText']?>">
+        <?php endfor;?>
+    <?php endforeach;?>
+
 </body>
 </html>
