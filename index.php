@@ -15,6 +15,10 @@ $name = $surname = $username = $email = $password = $dateOfBirth = $tapWater1 = 
 
 
 if (isset($_GET)){
+    if (isset($_GET['recover-password'])) {
+        echo $template->render('recover_password');
+        exit(0);
+    }
     if (isset($_GET['signUp'])){
         echo $template->render('signUp', [
             'name' => $username,
@@ -51,15 +55,19 @@ if (isset($_POST)){
     if (isset($_POST['username'])){
         $username = $_POST['username'];
         $password = $_POST['password'];
-        if(Model\UserRepository::checkUserExists($username)==null){
+        $email = $_POST['email'];
+        $name = $_POST['name'];
+        $surname = $_POST['surname'];
+        $dateOfBirth = $_POST['dateOfBirth'];
+        if(!Model\UserRepository::checkUserExists($username)){
             Model\UserRepository::createNewUser($username, $email, $password, $name, $surname, $dateOfBirth);
-            echo $template->render('signUp' , [
-                'successful' => true,
+            echo $template->render('login' , [
+                'successful' => false,
             ]);
         }
         else {
-            echo $template->render('login' , [
-                'successful' => false,
+            echo $template->render('signUp' , [
+                'successful' => true,
             ]);
         }
         exit(0);
@@ -73,6 +81,60 @@ if (isset($_POST)){
         $filtrationSystem1 = $_POST['question_4'];
         $filtrationSystem2 = $_POST['question_5'];
         SurveyRepository::addAnswer($location, $comments, $tapWater1, $tapWater2, $tapWater3, $filtrationSystem1, $filtrationSystem2);
+    }
+    if (isset($_POST['recover_password_email'])) {
+        $email = $_POST['recover_password_email'];
+        if (UserRepository::mailExists($email)) {
+            $rand = rand(100000, 999999);
+            $message = 'To recover your password use this code: ' . $rand;
+            $name = UserRepository::getUserFromEmail($email);
+            Util\SendMail::sendMailToRecoverPassword($message, $email, $name);
+            UserRepository::insertCodeVerify($email, $rand);
+            echo $template->render('verify_code', [
+                'email' => $email,
+            ]);
+            exit(0);
+        } else {
+            echo $template->render('recover_password', [
+                'error' => 'Email not found.'
+            ]);
+            exit(0);
+        }
+    }
+
+    if (isset($_POST['verfy_code_number'])) {
+        $number = $_POST['verfy_code_number'];
+        $email = $_POST['verify_code_email'];
+        if (UserRepository::verifyCode($email, $number)) {
+            echo $template->render('new_password', [
+                'email' => $email
+            ]);
+            exit(0);
+        } else {
+            echo $template->render('verify_code', [
+                'error' => 'Invalid verification code.',
+                'email' => $email
+            ]);
+            exit(0);
+        }
+    }
+
+    if (isset($_POST['new_password_password'])) {
+        $password = $_POST['new_password_password'];
+        $confirmPassword = $_POST['new_password_confirm_password'];
+        $email = $_POST['new_password_email'];
+        if ($password != $confirmPassword) {
+            echo $template->render('new_password', [
+                'error' => 'Passwords do not match.',
+                'email' => $email
+            ]);
+            exit(0);
+        }
+        UserRepository::changePassword($email, $password);
+        echo $template->render('login', [
+            'message' => 'Password successfully changed.'
+        ]);
+        exit(0);
     }
 }
 /*if (isset($_POST)){
@@ -110,7 +172,7 @@ if (isset($_POST)){
     }
 
 }
-
+**/
 echo $template->render('login', [
 
 ]);

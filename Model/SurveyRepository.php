@@ -7,7 +7,7 @@ class SurveyRepository{
     public static function addAnswer($location, $comments, $tapWater1, $tapWater2, $tapWater3, $filtrationSystem1, $filtrationSystem2): void
     {
         $pdo = Connection::getInstance();
-        $sql = 'INSERT INTO options() VALUES()';
+        $sql = 'INSERT INTO () VALUES()';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
             'location' => $location,

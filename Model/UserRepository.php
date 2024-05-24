@@ -60,7 +60,7 @@ class UserRepository{
          ]);
          return true;
     }
-    public static function checkUserExists(string $username): ?array {
+    public static function checkUserExists(string $username):bool {
         $pdo = Connection::getInstance();
         $sql = 'SELECT * FROM user WHERE username=:username';
         $stmt = $pdo->prepare($sql);
@@ -68,13 +68,62 @@ class UserRepository{
             'username' => $username
         ]);
 
-        // Se non esiste un utente con lo stesso nome utente, restituisci null
-        if ($stmt->rowCount() == 0) {
-            return null;
-        }
-
-        // Se esiste un utente con lo stesso nome utente, restituisci i dati dell'utente
-        return $stmt->fetch();
+        return $stmt->rowCount() > 0;
     }
 
+    public static function getEmails(){
+        $pdo = Connection::getInstance();
+        $result = $pdo->query('select email from user');
+        return $result->fetchAll();
+    }
+    public static function mailExists($email):bool{
+        $pdo = Connection::getInstance();
+        $sql = 'select email from user where email = :email';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'email', $email
+        ]);
+        return $stmt->rowCount() > 0;
+    }
+
+    public static function changePassword($email, $password){
+        $pdo = Connection::getInstance();
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        $sql = 'UPDATE user SET password = :password WHERE email = :email';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'password' => $password,
+            'email' => $email
+        ]);
+    }
+    public static function insertCodeVerify($email, $code){
+        $pdo = Connection::getInstance();
+        $code = password_hash($code, PASSWORD_DEFAULT);
+        $sql = 'INSERT INTO user(email, code) VALUES (:email, :code)';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'email' => $email,
+            'code' => $code
+        ]);
+    }
+    public static function verifyCode($email, $code):bool{
+        $pdo = Connection::getInstance();
+        $code = password_hash($code, PASSWORD_DEFAULT);
+        $sql = 'SELECT * FROM user WHERE email = :email AND code = :code';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'email' => $email,
+            'code' => $code
+        ]);
+        return $stmt->rowCount() > 0;
+    }
+    public static function getUserFromEmail($email){
+        $pdo = Connection::getInstance();
+        $sql = 'SELECT username FROM user WHERE email = :email';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'email' => $email
+        ]);
+        return $stmt->fetch();
+    }
 }
