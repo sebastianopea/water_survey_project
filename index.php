@@ -47,6 +47,7 @@ if (isset($_GET)){
         exit(0);
     }
 }
+if (isset($_POST)){
 if (isset($_POST['username'])){
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -83,17 +84,8 @@ if (isset($_POST['Submit_Survey'])){
         $dateOfBirth = $_POST['dateOfBirth'];
 
 
-        if (strlen($password) >= 8 && \Model\UserRepository::createNewUser($username, $email, $password, $name, $surname, $dateOfBirth)) {
-            $message = 'Account created';
-            echo $template->render('login',[
-                'popupMessage' => $message,
-                ]);
-            exit(0);
-        }
-        else
-        {
-            $error = 'E-mail or username already used or password doesn\'t contain at least 8 characters';
-            echo $template->render('signUp', [
+        if (!\Model\UserRepository::createNewUser($username, $email, $password, $name, $surname, $dateOfBirth) || strlen($password) < 8) {
+            echo $template->render('singUp', [
                     'name' => $username,
                     'surname' => $surname,
                     'dateOfBirth' => $dateOfBirth,
@@ -101,8 +93,22 @@ if (isset($_POST['Submit_Survey'])){
                 ]);
             exit(0);
         }
+        else
+        {
+            echo $template->render('login');
+            exit(0);
+        }
     }
-}*/
+    if (isset($_POST['Submit_Survey'])){
+        $location = $_POST['location'];
+        $comments = $_POST['comments'];
+        $question1 = $_POST['question_1'];
+        $question2 = $_POST['question_2'];
+        $question3 = $_POST['question_3'];
+        $question4 = $_POST['question_4'];
+    }
+
+}
 
 echo $template->render('login', [
 
