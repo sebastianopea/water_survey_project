@@ -1,5 +1,5 @@
 <?php
-
+ini_set('display_errors', 1); error_reporting(E_ALL);
 require_once 'vendor/autoload.php';
 require_once 'conf/config.php';
 
@@ -12,45 +12,84 @@ use Util\Authenticator;
 $template = new Engine('templates','tpl');
 
 $name = $surname = $username = $email = $password = $dateOfBirth = $tapWater1 = $tapWater2 = $tapWater3 = $filtrationSystem1 = $filtrationSystem2 = null;
+//variabili per la gestione del campo che fa vedere se il survey è già stato compilato dall'utente o no
+//vanno gestite con una funzione che controlla effettivamente se il form è stato compilato dall'utente o meno
+$isSolved = false;
+$isSolved1 = true;
+$user = Authenticator::getUser();
 
-
-if (isset($_GET)){
-    if (isset($_GET['recover-password'])) {
-        echo $template->render('recover_password');
-        exit(0);
-    }
-    if (isset($_GET['signUp'])){
-        echo $template->render('signUp', [
-            'name' => $username,
-            'surname' => $surname,
-            'dateOfBirth' => $dateOfBirth,
-        ]);
-        exit(0);
-    }
-    if (isset($_GET['waterSurvey'])){
-        $questions =Model\SurveyRepository::getQuestionsBySurveyId(1);
-        echo $template->render('survey', [
-            'questions' =>$questions
-        ]);
-        exit(0);
-    }
-    if (isset($_GET['dash'])) {
-        echo $template->render('dashboard',[
+if ($user == null && !isset($_GET)){
+    echo $template->render('dashboard'
+        ,[
+            'isSolved' => $isSolved,
+            'isSolved1' => $isSolved1,
             'tapWater1' => $tapWater1,
             'tapWater2' => $tapWater2,
             'tapWater3' => $tapWater3,
             'filtrationSystem1' => $filtrationSystem1,
             'filtrationSystem2' => $filtrationSystem2,
         ]);
-        exit(0);
-    }
-    if (isset($_GET['login'])){
-        echo $template->render('login', [
-
-        ]);
-        exit(0);
-    }
+    exit(0);
 }
+
+if (isset($user['name']) && isset($user['surname'])) {
+    $displayed_name = $user['name'] . ' ' . $user['surname'];
+} else {
+    // Gestione nel caso in cui $user['name'] o $user['surname'] siano null
+    $displayed_name = '';
+}
+
+// Controlla i parametri GET uno per uno
+if (isset($_GET['login'])) {
+    echo $template->render('login');
+    exit(0);
+}
+if (isset($_GET['recover-password'])) {
+    echo $template->render('recover_password');
+    exit(0);
+}
+if (isset($_GET['signUp'])) {
+    echo $template->render('signUp', [
+        'name' => $username,
+        'surname' => $surname,
+        'dateOfBirth' => $dateOfBirth,
+    ]);
+    exit(0);
+}
+if (isset($_GET['waterSurvey'])) {
+    $questions = Model\SurveyRepository::getQuestionsBySurveyId(1);
+    echo $template->render('survey', [
+        'questions' => $questions
+    ]);
+    exit(0);
+}
+if (isset($_GET['dash'])) {
+    echo $template->render('dashboard', [
+        'displayedName' => $displayed_name,
+        'isSolved' => $isSolved,
+        'isSolved1' => $isSolved1,
+        'tapWater1' => $tapWater1,
+        'tapWater2' => $tapWater2,
+        'tapWater3' => $tapWater3,
+        'filtrationSystem1' => $filtrationSystem1,
+        'filtrationSystem2' => $filtrationSystem2,
+    ]);
+    exit(0);
+}
+if(isset($user['name'])){
+    echo $template->render('dashboard', [
+        'displayedName' => $displayed_name,
+        'isSolved' => $isSolved,
+        'isSolved1' => $isSolved1,
+        'tapWater1' => $tapWater1,
+        'tapWater2' => $tapWater2,
+        'tapWater3' => $tapWater3,
+        'filtrationSystem1' => $filtrationSystem1,
+        'filtrationSystem2' => $filtrationSystem2,
+    ]);
+    exit(0);
+}
+
 if (isset($_POST)){
     if (isset($_POST['username'])){
         $username = $_POST['username'];
@@ -137,42 +176,6 @@ if (isset($_POST)){
         exit(0);
     }
 }
-/*if (isset($_POST)){
-    if (isset($_POST['signUp'])){
-        $name = $_POST['name'];
-        $surname = $_POST['surname'];
-        $username = $_POST['username'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $dateOfBirth = $_POST['dateOfBirth'];
 
-
-        if (!\Model\UserRepository::createNewUser($username, $email, $password, $name, $surname, $dateOfBirth) || strlen($password) < 8) {
-            echo $template->render('singUp', [
-                    'name' => $username,
-                    'surname' => $surname,
-                    'dateOfBirth' => $dateOfBirth,
-                    ''
-                ]);
-            exit(0);
-        }
-        else
-        {
-            echo $template->render('login');
-            exit(0);
-        }
-    }
-    if (isset($_POST['Submit_Survey'])){
-        $location = $_POST['location'];
-        $comments = $_POST['comments'];
-        $question1 = $_POST['question_1'];
-        $question2 = $_POST['question_2'];
-        $question3 = $_POST['question_3'];
-        $question4 = $_POST['question_4'];
-    }
-
-}
-**/
-echo $template->render('login', [
-
-]);
+echo $template->render('dashboard');
+exit(0);

@@ -5,6 +5,7 @@ use Util\Connection;
 
 class UserRepository{
 
+
     public static function userAuthentication(string $username, string $password):array|null{
         $pdo = Connection::getInstance();
         $sql = 'SELECT * FROM watersurvey.user WHERE username=:username';

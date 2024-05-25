@@ -2,7 +2,7 @@
 
 namespace Util;
 
-use Model\TodoRepository;
+use Model\UserRepository;
 
 /**
  * Classe per gestire l'autenticazione
@@ -31,7 +31,7 @@ class Authenticator{
             $password = $_POST['password'];
 
             //Verifica se le credenziali sono corrette
-            $row = TodoRepository::userAuthentication($username, $password);
+            $row = UserRepository::userAuthentication($username, $password);
             //Se non sono valide ritorna false
             if ($row != null) {
                 //Memorizza nelle variabili di sessione tutti gli
