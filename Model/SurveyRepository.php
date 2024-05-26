@@ -4,22 +4,31 @@ namespace Model;
 use Util\Connection;
 
 class SurveyRepository{
-    public static function addAnswer($location, $comments, $tapWater1, $tapWater2, $tapWater3, $filtrationSystem1, $filtrationSystem2): void
+    public static function addAnswer($surveyId, $location, $responses ,$user_id): void
     {
         $pdo = Connection::getInstance();
-        $sql = 'INSERT INTO () VALUES()';
+        $sql = 'INSERT INTO answers (survey_Id, question_Id, selectedOption ,user_id) VALUES (:survey_Id, :question_Id, :selectedOption ,:user_id)';
+
+        foreach ($responses as $questionId => $response) {
+            // Assumiamo che `selectedOption` sia un ID numerico delle opzioni (da modificare se necessario)
+            if (is_numeric($response)) {
+                $selectedOption = (int)$response;
+            } else {
+                // Gestisci risposte che non sono numeriche (ad esempio, textarea)
+                $selectedOption = $response;
+            }
+
         $stmt = $pdo->prepare($sql);
+
+
         $stmt->execute([
-            'location' => $location,
-            'comments' => $comments,
-            'tapWater1' => $tapWater1,
-            'tapWater2' => $tapWater2,
-            'tapWater3' => $tapWater3,
-            'filtrationSystem1' => $filtrationSystem1,
-            'filtrationSystem2' => $filtrationSystem2,
+            ':survey_Id' => $surveyId,
+            ':question_Id' => $questionId,
+            ':selectedOption' => $selectedOption,
+            ':user_id' => $user_id,
         ]);
     }
-
+    }
     public static function getAllSurveys(): array
     {
         $pdo = Connection::getInstance();

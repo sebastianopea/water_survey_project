@@ -29,23 +29,40 @@ class UserRepository{
         return $row;
     }
 
-    public static function existUsername($username, $email):bool
-    {
-        $sql = 'SELECT * FROM watersurvey.user WHERE username = :username AND email = :email';
+    public static function checkUserExists(string $username): ?array {
         $pdo = Connection::getInstance();
+        $sql = 'SELECT * FROM watersurvey.user WHERE username=:username';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
-            'username' => $username,
-            'email' => $email,
+            'username' => $username
         ]);
-        if ($stmt->rowCount() == 0)
-            return false;
-        return true;
+
+        // Se non esiste un utente con lo stesso nome utente, restituisci null
+        if ($stmt->rowCount() == 0) {
+            return null;
+        }
+
+        // Se esiste un utente con lo stesso nome utente, restituisci i dati dell'utente
+        return $stmt->fetch();
     }
-    public static function createNewUser($username, $email, $password, $name, $surname, $dateOfBirth):bool
+    public static function checkEmailExists(string $email): ?array {
+        $pdo = Connection::getInstance();
+        $sql = 'SELECT * FROM watersurvey.user WHERE email=:email';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'email' => $email
+        ]);
+
+        // Se non esiste un utente con lo stesso nome utente, restituisci null
+        if ($stmt->rowCount() == 0) {
+            return null;
+        }
+
+        // Se esiste un utente con lo stesso nome utente, restituisci i dati dell'utente
+        return $stmt->fetch();
+    }
+    public static function addUser($username, $email, $password, $name, $surname, $dateOfBirth):bool
     {
-         if (self::existUsername($username, $email))
-             return false;
          $password = password_hash($password, PASSWORD_DEFAULT);
          $sql = 'INSERT INTO watersurvey.user (username, email, password, name, surname, dateOfBirth)
                  VALUES (:username, :email, :password, :name, :surname, :dateOfBirth)';
@@ -61,16 +78,7 @@ class UserRepository{
          ]);
          return true;
     }
-    public static function checkUserExists(string $username):bool {
-        $pdo = Connection::getInstance();
-        $sql = 'SELECT * FROM user WHERE username=:username';
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([
-            'username' => $username
-        ]);
 
-        return $stmt->rowCount() > 0;
-    }
 
     public static function getEmails(){
         $pdo = Connection::getInstance();
