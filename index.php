@@ -15,8 +15,8 @@ $name = $surname = $username = $email = $password = $dateOfBirth = $tapWater1 = 
 //vanno gestite con una funzione che controlla effettivamente se il form è stato compilato dall'utente o meno
 $isSolved = false;
 $isSolved1 = true;
-var_dump(isset($test));
-var_dump($_POST);
+/*var_dump(isset($test));
+var_dump($_POST);*/
 
 $user = Authenticator::getUser();
 if (isset($_GET['login'])) {
