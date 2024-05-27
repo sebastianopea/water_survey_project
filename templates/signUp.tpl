@@ -128,9 +128,8 @@
 </form>
 <br>
 <br>
-<?php if (isset($successful) && $successful): ?>
-<div class="successful-message" style="display:block" id="successful">User created successfully</div>
-<?php elseif (isset($successful) && !$successful): ?>
+
+<?php if (isset($successful) && !$successful): ?>
 <div class="error-message" style="display:block" id="error">User already exists</div>
 <?php endif; ?>
 <div class="error-message2" id="password-error">Passwords do not match</div>

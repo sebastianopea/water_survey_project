@@ -121,7 +121,55 @@
 </div>
 
 <br><br><br>
+<?php if (isset($successful) && $successful): ?>
 
+<div id="success-alert" role="alert" class="rounded-lg border border-gray-100 bg-white p-2 max-w-xs mx-auto">
+    <div class="flex items-start gap-2">
+        <span class="text-green-600">
+            <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="h-4 w-4"
+            >
+                <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+            </svg>
+        </span>
+
+        <div class="flex-1">
+            <strong class="block font-medium text-gray-900">Account created successfully</strong>
+        </div>
+
+        <button class="text-gray-500 transition hover:text-gray-600" onclick="document.getElementById('success-alert').style.display='none'">
+            <span class="sr-only">Dismiss popup</span>
+
+            <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="h-4 w-4"
+            >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+    </div>
+</div>
+
+<script>
+    setTimeout(function() {
+        document.getElementById('success-alert').style.display = 'none';
+    }, 3000); // 3000 milliseconds = 3 seconds
+</script>
+
+<?php endif; ?>
 <?php if(isset($login_fallito)):?>
 <div class="error-message" style="display:block" id="error">Credenziali non corrette , riprova</div>
 <?php endif; ?>
