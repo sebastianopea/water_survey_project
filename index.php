@@ -8,7 +8,7 @@ use Model\UserRepository;
 use League\Plates\Engine;
 use Model\SurveyRepository;
 use Util\Authenticator;
-
+//Util\SendMail::sendMailToRecoverPassword('ciao', 'peasebastiano@gmail.com', 'ciao');
 $template = new Engine('templates','tpl');
 $name = $surname = $username = $email = $password = $dateOfBirth = $tapWater1 = $tapWater2 = $tapWater3 = $filtrationSystem1 = $filtrationSystem2 = null;
 //variabili per la gestione del campo che fa vedere se il survey è già stato compilato dall'utente o no
@@ -78,18 +78,18 @@ if (isset($_POST)){
     if (isset($_POST['location'])) {
         $test=true;
         $location = isset($_POST['location']) ? trim($_POST['location']) : '';
+        SurveyRepository::addAnswer(1,7, $location,$user['id']);
+
         $questions=SurveyRepository::getAllQuestions();
         // Inizializza un array per le risposte
         $responses = [];
+
         // Itera attraverso le domande
         foreach ($questions as $question) {
             $questionId = $question['id'];
             $responseKey = 'question_' . $questionId;
 
-            if ($questionId == 6) {
-                // Gestione speciale per la domanda di commenti
-                $responses[$questionId] = isset($_POST['comments']) ? trim($_POST['comments']) : '';
-            } else {
+            if ($questionId!=7) {
                 // Gestisci altri tipi di risposte
                 if (isset($_POST[$responseKey])) {
                     $responses[$questionId] = $_POST[$responseKey];
@@ -105,49 +105,48 @@ if (isset($_POST)){
                     // Valore predefinito per risposte mancanti
                     $responses[$questionId] = '';
                 }
+
+                SurveyRepository::addAnswer(1, $questionId, $responses[$questionId], $user['id']);
             }
         }
 
-        // Aggiungi le risposte al repository
-        SurveyRepository::addAnswer(1,$location, $responses,$user['id']);
-        echo $template->render('survey', [
-            'questions' => $questions
+        echo $template->render('completedSurvey', [
         ]);
         exit(0);
     }
 // Controlla i parametri GET uno per uno
-if (isset($_GET['recover-password'])) {
-    echo $template->render('recover_password');
-    exit(0);
-}
+    if (isset($_GET['recover-password'])) {
+        echo $template->render('recover_password');
+        exit(0);
+    }
 
 
-if (isset($_GET['dash'])) {
-    echo $template->render('dashboard', [
-        'displayedName' => $displayed_name,
-        'isSolved' => $isSolved,
-        'isSolved1' => $isSolved1,
-        'tapWater1' => $tapWater1,
-        'tapWater2' => $tapWater2,
-        'tapWater3' => $tapWater3,
-        'filtrationSystem1' => $filtrationSystem1,
-        'filtrationSystem2' => $filtrationSystem2,
-    ]);
-    exit(0);
-}
-if(isset($user['name'])){
-    echo $template->render('dashboard', [
-        'displayedName' => $displayed_name,
-        'isSolved' => $isSolved,
-        'isSolved1' => $isSolved1,
-        'tapWater1' => $tapWater1,
-        'tapWater2' => $tapWater2,
-        'tapWater3' => $tapWater3,
-        'filtrationSystem1' => $filtrationSystem1,
-        'filtrationSystem2' => $filtrationSystem2,
-    ]);
-    exit(0);
-}
+    if (isset($_GET['dash'])) {
+        echo $template->render('dashboard', [
+            'displayedName' => $displayed_name,
+            'isSolved' => $isSolved,
+            'isSolved1' => $isSolved1,
+            'tapWater1' => $tapWater1,
+            'tapWater2' => $tapWater2,
+            'tapWater3' => $tapWater3,
+            'filtrationSystem1' => $filtrationSystem1,
+            'filtrationSystem2' => $filtrationSystem2,
+        ]);
+        exit(0);
+    }
+    if(isset($user['name'])){
+        echo $template->render('dashboard', [
+            'displayedName' => $displayed_name,
+            'isSolved' => $isSolved,
+            'isSolved1' => $isSolved1,
+            'tapWater1' => $tapWater1,
+            'tapWater2' => $tapWater2,
+            'tapWater3' => $tapWater3,
+            'filtrationSystem1' => $filtrationSystem1,
+            'filtrationSystem2' => $filtrationSystem2,
+        ]);
+        exit(0);
+    }
 
     if (isset($_POST['recover_password_email'])) {
         $email = $_POST['recover_password_email'];

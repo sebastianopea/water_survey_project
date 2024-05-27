@@ -157,7 +157,7 @@
         ?>
     </fieldset>
 
-    <input type="submit" value="Submit_Survey">
+    <input type="submit" value="Submit survey">
 </form>
 <script>
     function validateForm() {
