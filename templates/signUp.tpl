@@ -143,6 +143,7 @@
 <div class="error-message2" id="password-error">Passwords do not match</div>
 </body>
 </html>
+
 <script>
     function validateForm() {
         var password = document.getElementById("password").value;

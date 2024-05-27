@@ -117,7 +117,7 @@
     </style>
 </head>
 <body>
-<a class="block text-teal-600" style="padding-left: 25px" href="index.php?login">
+<a class="block text-teal-600" style="padding-left: 25px; padding-top: 25px" href="index.php?login">
     <span class="sr-only">Home</span>
     <svg class="h-8" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
