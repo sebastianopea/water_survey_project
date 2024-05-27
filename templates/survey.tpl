@@ -107,10 +107,11 @@
             $questionId = $question['id'];
             $questionText = $question['questionText'];
             $questionType = $question['questionType'];
+            if ($questionId != 7) {
             if ($questionId == 6) {
                 echo '<legend>Additional Comments</legend>';
         echo '<label for="comments">Do you have any additional comments or suggestions?</label>';
-        echo '<textarea id="comments" name="comments" rows="4" cols="50"></textarea><br>';
+        echo '<textarea id="comments" name="question_6" rows="4" cols="50"></textarea><br>';
         } else {
         echo '<p>' . htmlspecialchars($questionText) . '</p>';
 
@@ -122,7 +123,7 @@
         case 1: // Radio button example
         if (!empty($options)) {
         foreach ($options as $option) {
-        echo '<label><input type="radio" name="question_' . $questionId . '" value="' . htmlspecialchars($option['optionText']) . '"> ' . htmlspecialchars($option['optionText']) . '</label><br>';
+        echo '<label><input type="radio" required name="question_' . $questionId . '" value="' . htmlspecialchars($option['optionText']) . '"> ' . htmlspecialchars($option['optionText']) . '</label><br>';
         }
         }
         break;
@@ -149,6 +150,7 @@
         default:
         // Handle other types if necessary
         break;
+        }
         }
         }
         }
