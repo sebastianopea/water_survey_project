@@ -8,7 +8,8 @@ use Model\UserRepository;
 use League\Plates\Engine;
 use Model\SurveyRepository;
 use Util\Authenticator;
-//Util\SendMail::sendMailToRecoverPassword('ciao', 'peasebastiano@gmail.com', 'ciao');
+use Util\SendMail;
+
 $template = new Engine('templates','tpl');
 $name = $surname = $username = $email = $password = $dateOfBirth = $tapWater1 = $tapWater2 = $tapWater3 = $filtrationSystem1 = $filtrationSystem2 = null;
 //variabili per la gestione del campo che fa vedere se il survey è già stato compilato dall'utente o no

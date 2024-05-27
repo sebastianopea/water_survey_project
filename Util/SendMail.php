@@ -8,7 +8,6 @@ use PHPMailer\PHPMailer\SMTP;
 class SendMail
 {
     public static function sendMailToRecoverPassword($message, $emailDest, $username):bool{
-
         $mail = new PHPMailer();
         $mail->isSMTP();
         $mail->SMTPDebug = SMTP::DEBUG_SERVER;
@@ -37,5 +36,3 @@ class SendMail
         }
     }
 }
-
-

@@ -26,13 +26,16 @@ CREATE TABLE `answers` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `survey_Id` int(10) unsigned DEFAULT NULL,
   `question_Id` int(10) unsigned DEFAULT NULL,
-  `selectedOption` int(11) DEFAULT NULL,
+  `selectedOption` varchar(100) NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `question_Id` (`question_Id`),
   KEY `survey_Id` (`survey_Id`),
+  KEY `user_id` (`user_id`),
   CONSTRAINT `question_Id` FOREIGN KEY (`question_Id`) REFERENCES `questions` (`id`),
-  CONSTRAINT `survey_Id` FOREIGN KEY (`survey_Id`) REFERENCES `survey` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  CONSTRAINT `survey_Id` FOREIGN KEY (`survey_Id`) REFERENCES `survey` (`id`),
+  CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +94,7 @@ CREATE TABLE `questions` (
   KEY `questionType_id` (`questionType`),
   CONSTRAINT `questionType_id` FOREIGN KEY (`questionType`) REFERENCES `typeofquestion` (`id`),
   CONSTRAINT `surveyId` FOREIGN KEY (`surveyId`) REFERENCES `survey` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,7 +103,7 @@ CREATE TABLE `questions` (
 
 LOCK TABLES `questions` WRITE;
 /*!40000 ALTER TABLE `questions` DISABLE KEYS */;
-INSERT INTO `questions` VALUES (1,1,'How would you rate the overall quality of the tap water in your area?',1),(2,1,'Have you noticed any unusual taste or odor in the tap water?',2),(3,1,'How frequently do you use tap water for drinking?',3),(4,1,'Do you use any water filtration systems at home?',1),(5,1,'If yes, what type of filtration system do you use?',4),(6,1,'Do you have any additional comments or suggestions?',4);
+INSERT INTO `questions` VALUES (1,1,'How would you rate the overall quality of the tap water in your area?',1),(2,1,'Have you noticed any unusual taste or odor in the tap water?',2),(3,1,'How frequently do you use tap water for drinking?',3),(4,1,'Do you use any water filtration systems at home?',1),(5,1,'If yes, what type of filtration system do you use?',4),(6,1,'Do you have any additional comments or suggestions?',4),(7,1,'Location',5);
 /*!40000 ALTER TABLE `questions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,7 +144,7 @@ CREATE TABLE `typeofquestion` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `type` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,7 +153,7 @@ CREATE TABLE `typeofquestion` (
 
 LOCK TABLES `typeofquestion` WRITE;
 /*!40000 ALTER TABLE `typeofquestion` DISABLE KEYS */;
-INSERT INTO `typeofquestion` VALUES (1,'radio'),(2,'checkbox'),(3,'select'),(4,'textarea');
+INSERT INTO `typeofquestion` VALUES (1,'radio'),(2,'checkbox'),(3,'select'),(4,'textarea'),(5,'text');
 /*!40000 ALTER TABLE `typeofquestion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -170,7 +173,7 @@ CREATE TABLE `user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -179,6 +182,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES ('riccardo','poli','poli','poli@azienda.com','2024-05-17',11,'$2y$10$vnMOura6hIDbCK1ElTqm4ek3jsHnIjhRinLklkcrWJwgoLVUCJA9y');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -191,4 +195,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-24  9:15:23
+-- Dump completed on 2024-05-27 12:13:21

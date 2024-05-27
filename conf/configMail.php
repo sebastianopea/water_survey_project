@@ -1,5 +1,5 @@
 <?php
-const MAIL = '';
+const MAIL = 'verify.number.php@gmail.com';
 //Password to use for SMTP authentication
 //Si veda questo link per predisporre l'indirizzo gmail
 //in modo che possa essere usato per inviare mail
