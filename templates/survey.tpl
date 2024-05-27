@@ -93,7 +93,7 @@
 <br>
 <p>We appreciate your participation in this survey about the water quality in your area. Your feedback is valuable and will help us improve our services.</p>
 <br>
-<form action="index.php" method="post">
+<form action="index.php" method="post" onsubmit="return validateForm()>
     <fieldset>
         <label for="location">Location:</label>
         <input type="text" id="location" name="location" required>
@@ -158,5 +158,11 @@
 
     <input type="submit" value="Submit_Survey">
 </form>
+<script>
+    function validateForm() {
+        errorMessage.style.display = "none";
+        return true;
+    }
+</script>
 </body>
 </html>

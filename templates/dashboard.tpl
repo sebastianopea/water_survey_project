@@ -188,21 +188,21 @@ $isSolved1 = isset($isSolved1) ? $isSolved1 : false;
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-2 gap-4 md:grid-cols-1 lg:grid-cols-2">
-                <img
-                        alt=""
-                        src="/img/water4.png"
-                        class="h-40 w-full object-cover sm:h-56 md:h-full"
-                />
-                <img
-                        alt=""
-                        src="/img/water3.png"
-                        class="h-40 w-full object-cover sm:h-56 md:h-full"
-                />
+            <div class="mx-auto max-w-screen-2xl px-4 py-8 sm:px-6 lg:px-8" style="display: flex; align-items: center; justify-content: center; padding: 20px;">
+                <div style="border: 5px solid #4A90E2; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 100%; height: 100%;">
+                    <img
+                            alt=""
+                            src="/img/water3.png"
+                            style="width: 100% ; height: 100%; object-fit: cover;"
+                    />
+                </div>
             </div>
         </div>
     </div>
 </section>
+
+
+
 <br><br><br><br><br><br><br><br><br><br>
 
 <section class="bg-gray-900 text-white">
