@@ -8,6 +8,7 @@ use Model\UserRepository;
 use League\Plates\Engine;
 use Model\SurveyRepository;
 use Util\Authenticator;
+use Util\SendMail;
 
 $template = new Engine('templates','tpl');
 

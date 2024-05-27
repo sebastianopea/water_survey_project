@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e0ce6d32f2edd0fe26adec94b9681ca3",
+    "content-hash": "d85cea3041dfe99f29919a34f03f6022",
     "packages": [
         {
             "name": "league/plates",

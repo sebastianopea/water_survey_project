@@ -8,6 +8,7 @@ use PHPMailer\PHPMailer\SMTP;
 class SendMail
 {
     public static function sendMailToRecoverPassword($message, $emailDest, $username):bool{
+
         $mail = new PHPMailer();
         $mail->isSMTP();
         $mail->SMTPDebug = SMTP::DEBUG_SERVER;
@@ -15,13 +16,13 @@ class SendMail
         $mail->Port = 465;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->SMTPAuth = true;
-        $mail->Username = MAIL;
+        $mail->Username = 'verify.number.php@gmail.com';
 
 
-        $mail->Password = PASSWORD_MAIL;
+        $mail->Password = '';
 
-        $mail->setFrom(MAIL, 'Water survey service');
-        $mail->addReplyTo(MAIL, 'Water survey service');
+        $mail->setFrom('verify.number.php@gmail.com', 'Water survey service');
+        $mail->addReplyTo('verify.number.php@gmail.com', 'Water survey service');
 
         $mail->addAddress($emailDest, $username);
 
@@ -36,3 +37,5 @@ class SendMail
         }
     }
 }
+
+
