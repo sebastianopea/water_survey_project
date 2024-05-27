@@ -107,7 +107,6 @@
             $questionId = $question['id'];
             $questionText = $question['questionText'];
             $questionType = $question['questionType'];
-
             if ($questionId == 6) {
                 echo '<legend>Additional Comments</legend>';
         echo '<label for="comments">Do you have any additional comments or suggestions?</label>';

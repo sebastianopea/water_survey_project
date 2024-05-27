@@ -4,19 +4,10 @@ namespace Model;
 use Util\Connection;
 
 class SurveyRepository{
-    public static function addAnswer($surveyId, $location, $responses ,$user_id): void
+    public static function addAnswer($surveyId, $questionId, $response ,$user_id): void
     {
         $pdo = Connection::getInstance();
         $sql = 'INSERT INTO answers (survey_Id, question_Id, selectedOption ,user_id) VALUES (:survey_Id, :question_Id, :selectedOption ,:user_id)';
-
-        foreach ($responses as $questionId => $response) {
-            // Assumiamo che `selectedOption` sia un ID numerico delle opzioni (da modificare se necessario)
-            if (is_numeric($response)) {
-                $selectedOption = (int)$response;
-            } else {
-                // Gestisci risposte che non sono numeriche (ad esempio, textarea)
-                $selectedOption = $response;
-            }
 
         $stmt = $pdo->prepare($sql);
 
@@ -24,11 +15,11 @@ class SurveyRepository{
         $stmt->execute([
             ':survey_Id' => $surveyId,
             ':question_Id' => $questionId,
-            ':selectedOption' => $selectedOption,
+            ':selectedOption' => $response,
             ':user_id' => $user_id,
         ]);
     }
-    }
+
     public static function getAllSurveys(): array
     {
         $pdo = Connection::getInstance();

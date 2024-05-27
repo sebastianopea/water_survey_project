@@ -15,8 +15,7 @@ $name = $surname = $username = $email = $password = $dateOfBirth = $tapWater1 = 
 //vanno gestite con una funzione che controlla effettivamente se il form è stato compilato dall'utente o meno
 $isSolved = false;
 $isSolved1 = true;
-var_dump(isset($test));
-var_dump($_POST);
+
 
 $user = Authenticator::getUser();
 if (isset($_GET['login'])) {
@@ -79,18 +78,18 @@ if (isset($_POST)){
     if (isset($_POST['location'])) {
         $test=true;
         $location = isset($_POST['location']) ? trim($_POST['location']) : '';
+        SurveyRepository::addAnswer(1,7, $location,$user['id']);
+
         $questions=SurveyRepository::getAllQuestions();
         // Inizializza un array per le risposte
         $responses = [];
+
         // Itera attraverso le domande
         foreach ($questions as $question) {
             $questionId = $question['id'];
             $responseKey = 'question_' . $questionId;
 
-            if ($questionId == 6) {
-                // Gestione speciale per la domanda di commenti
-                $responses[$questionId] = isset($_POST['comments']) ? trim($_POST['comments']) : '';
-            } else {
+
                 // Gestisci altri tipi di risposte
                 if (isset($_POST[$responseKey])) {
                     $responses[$questionId] = $_POST[$responseKey];
@@ -106,11 +105,10 @@ if (isset($_POST)){
                     // Valore predefinito per risposte mancanti
                     $responses[$questionId] = '';
                 }
-            }
+
+            SurveyRepository::addAnswer(1,$questionId, $responses[$questionId],$user['id']);
         }
 
-        // Aggiungi le risposte al repository
-        SurveyRepository::addAnswer(1,$location, $responses,$user['id']);
         echo $template->render('survey', [
             'questions' => $questions
         ]);
