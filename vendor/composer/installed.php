@@ -3,7 +3,7 @@
         'name' => 'vendor_name/template_pdo_crud',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'cb903bbe96bda36b1402193e8e6f2eac3f92d090',
+        'reference' => 'db6e75d5bc719292f86ab48dcabe054b7b607852',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -31,7 +31,7 @@
         'vendor_name/template_pdo_crud' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'cb903bbe96bda36b1402193e8e6f2eac3f92d090',
+            'reference' => 'db6e75d5bc719292f86ab48dcabe054b7b607852',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

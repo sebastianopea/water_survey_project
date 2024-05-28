@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>verify code</h1>
-<form action="" method="post">
+<form action="index.php" method="post">
     <input type="hidden" value="<?=$email?>" name="verify_code_email">
     <input type="number" name="verify_code_number">
     <input type="submit">

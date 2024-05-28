@@ -63,6 +63,7 @@ class UserRepository{
     }
     public static function addUser($username, $email, $password, $name, $surname, $dateOfBirth):bool
     {
+        $email = strtolower($email);
          $password = password_hash($password, PASSWORD_DEFAULT);
          $sql = 'INSERT INTO watersurvey.user (username, email, password, name, surname, dateOfBirth)
                  VALUES (:username, :email, :password, :name, :surname, :dateOfBirth)';
@@ -85,14 +86,15 @@ class UserRepository{
         $result = $pdo->query('select email from user');
         return $result->fetchAll();
     }
-    public static function mailExists($email):bool{
+    public static function getUserFromMail($email){
+        $email = strtolower($email);
         $pdo = Connection::getInstance();
-        $sql = 'select email from user where email = :email';
+        $sql = 'select * from user where email = :email';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
-            'email', $email
+            'email' => $email
         ]);
-        return $stmt->rowCount() > 0;
+        return $stmt->fetch();
     }
 
     public static function changePassword($email, $password){
@@ -105,27 +107,7 @@ class UserRepository{
             'email' => $email
         ]);
     }
-    public static function insertCodeVerify($email, $code){
-        $pdo = Connection::getInstance();
-        $code = password_hash($code, PASSWORD_DEFAULT);
-        $sql = 'INSERT INTO user(email, code) VALUES (:email, :code)';
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([
-            'email' => $email,
-            'code' => $code
-        ]);
-    }
-    public static function verifyCode($email, $code):bool{
-        $pdo = Connection::getInstance();
-        $code = password_hash($code, PASSWORD_DEFAULT);
-        $sql = 'SELECT * FROM user WHERE email = :email AND code = :code';
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([
-            'email' => $email,
-            'code' => $code
-        ]);
-        return $stmt->rowCount() > 0;
-    }
+
     public static function getUserFromEmail($email){
         $pdo = Connection::getInstance();
         $sql = 'SELECT username FROM user WHERE email = :email';

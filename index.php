@@ -7,6 +7,7 @@ require_once 'conf/config.php';
 use Model\UserRepository;
 use League\Plates\Engine;
 use Model\SurveyRepository;
+use Model\VerifyCodeRepository;
 use Util\Authenticator;
 use Util\SendMail;
 
@@ -151,12 +152,13 @@ if (isset($_POST)){
 
     if (isset($_POST['recover_password_email'])) {
         $email = $_POST['recover_password_email'];
-        if (UserRepository::mailExists($email)) {
+        $userInfo = UserRepository::getUserFromMail($email);
+        if ($userInfo != null) {
             $rand = rand(100000, 999999);
             $message = 'To recover your password use this code: ' . $rand;
-            $name = UserRepository::getUserFromEmail($email);
+            $name = $userInfo['name'];
             Util\SendMail::sendMailToRecoverPassword($message, $email, $name);
-            UserRepository::insertCodeVerify($email, $rand);
+            \Model\VerifyCodeRepository::addVerifyCode($userInfo['id'],$rand);
             echo $template->render('verify_code', [
                 'email' => $email,
             ]);
@@ -169,28 +171,29 @@ if (isset($_POST)){
         }
     }
 
-    if (isset($_POST['verfy_code_number'])) {
-        $number = $_POST['verfy_code_number'];
+    if (isset($_POST['verify_code_number'])) {
+        $number = $_POST['verify_code_number'];
         $email = $_POST['verify_code_email'];
-        if (UserRepository::verifyCode($email, $number)) {
+        $userInfo = UserRepository::getUserFromMail($email);
+        var_dump($number);
+        if (VerifyCodeRepository::checkCode($userInfo['id'], $number)) {
             echo $template->render('new_password', [
                 'email' => $email
             ]);
-            exit(0);
         } else {
             echo $template->render('verify_code', [
                 'error' => 'Invalid verification code.',
                 'email' => $email
             ]);
-            exit(0);
         }
+        exit(0);
     }
 
     if (isset($_POST['new_password_password'])) {
         $password = $_POST['new_password_password'];
         $confirmPassword = $_POST['new_password_confirm_password'];
         $email = $_POST['new_password_email'];
-        if ($password != $confirmPassword) {
+        if ($password != $confirmPassword or strlen($password) < 8) {
             echo $template->render('new_password', [
                 'error' => 'Passwords do not match.',
                 'email' => $email
