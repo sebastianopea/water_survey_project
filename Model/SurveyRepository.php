@@ -4,6 +4,23 @@ namespace Model;
 use Util\Connection;
 
 class SurveyRepository{
+
+    public static function countNumAnswers($surveyId, $questionId, $string): int {
+        $pdo = Connection::getInstance();
+        $sql = 'SELECT (COUNT(*) * 100 / (SELECT COUNT(*) FROM answers WHERE survey_Id = :survey_Id AND question_Id = :question_Id)) AS percentage FROM answers WHERE survey_Id = :survey_Id AND question_Id = :question_Id AND selectedOption LIKE :answerType;';
+
+        $stmt = $pdo->prepare($sql);
+
+        $stmt->execute([
+            ':answerType' => $string,
+            ':survey_Id' => $surveyId,
+            ':question_Id' => $questionId,
+        ]);
+
+        // Fetch the count as an integer
+        $count = (int) $stmt->fetchColumn();
+        return $count;
+    }
     public static function addAnswer($surveyId, $questionId, $response ,$user_id): void
     {
         $pdo = Connection::getInstance();
