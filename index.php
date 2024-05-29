@@ -13,10 +13,7 @@ use Util\SendMail;
 
 $template = new Engine('templates','tpl');
 $name = $surname = $username = $email = $password = $dateOfBirth = $tapWater1 = $tapWater2 = $tapWater3 = $filtrationSystem1 = $filtrationSystem2 = null;
-//variabili per la gestione del campo che fa vedere se il survey è già stato compilato dall'utente o no
-//vanno gestite con una funzione che controlla effettivamente se il form è stato compilato dall'utente o meno
-$isSolved = false;
-$isSolved1 = true;
+
 
 
 $user = Authenticator::getUser();
@@ -37,10 +34,27 @@ if ($user === false) {
     exit(0);
 }
 
-if (isset($_GET['waterSurvey'])) {
+if (isset($_GET['waterSurvey1'])) {
     $questions = Model\SurveyRepository::getQuestionsBySurveyId(1);
+    $description =Model\SurveyRepository::getTextFromSurveyId(1);
+    $title = Model\SurveyRepository::getTitleFromSurveyId(1);
     echo $template->render('survey', [
-        'questions' => $questions
+        'questions' => $questions,
+        'nSurvey' => 1,
+        'description' => $description,
+        'title' => $title
+    ]);
+    exit(0);
+}
+else if (isset($_GET['waterSurvey2'])) {
+    $questions = Model\SurveyRepository::getQuestionsBySurveyId(2);
+    $description =Model\SurveyRepository::getTextFromSurveyId(2);
+    $title = Model\SurveyRepository::getTitleFromSurveyId(2);
+    echo $template->render('survey', [
+        'questions' => $questions,
+        'nSurvey' => 2,
+        'description' => $description,
+        'title' => $title
     ]);
     exit(0);
 }
@@ -77,12 +91,13 @@ if (isset($_POST)){
         }
         exit(0);
     }
-    if (isset($_POST['location'])) {
-        $test=true;
-        $location = isset($_POST['location']) ? trim($_POST['location']) : '';
-        SurveyRepository::addAnswer(1,7, $location,$user['id']);
-
-        $questions=SurveyRepository::getAllQuestions();
+    if (isset($_POST['surveySubmit'])) {
+        $nsurvey =$_POST['surveySubmit'];
+        if (isset($_POST['location'])){
+            $location = isset($_POST['location']) ? trim($_POST['location']) : '';
+            SurveyRepository::addAnswer(1,7, $location,$user['id']);
+        }
+        $questions = Model\SurveyRepository::getQuestionsBySurveyId($nsurvey);
         // Inizializza un array per le risposte
         $responses = [];
 
@@ -108,7 +123,7 @@ if (isset($_POST)){
                     $responses[$questionId] = '';
                 }
 
-                SurveyRepository::addAnswer(1, $questionId, $responses[$questionId], $user['id']);
+                SurveyRepository::addAnswer($nsurvey, $questionId, $responses[$questionId], $user['id']);
             }
         }
 
@@ -124,6 +139,9 @@ if (isset($_POST)){
 
 
     if (isset($_GET['dash'])) {
+        $isSolved= Model\SurveyRepository::HasDoneSurveyById($user['id'],1);
+        $isSolved1= Model\SurveyRepository::HasDoneSurveyById($user['id'],2);
+
         echo $template->render('dashboard', [
             'displayedName' => $displayed_name,
             'isSolved' => $isSolved,
@@ -137,6 +155,8 @@ if (isset($_POST)){
         exit(0);
     }
     if(isset($user['name'])){
+        $isSolved= Model\SurveyRepository::HasDoneSurveyById($user['id'],1);
+        $isSolved1= Model\SurveyRepository::HasDoneSurveyById($user['id'],2);
         echo $template->render('dashboard', [
             'displayedName' => $displayed_name,
             'isSolved' => $isSolved,
@@ -207,10 +227,11 @@ if (isset($_POST)){
     }
 }
 if ($user == null){
+
     echo $template->render('dashboard'
         ,[
-            'isSolved' => $isSolved,
-            'isSolved1' => $isSolved1,
+            'isSolved' => false,
+            'isSolved1' => false,
             'tapWater1' => $tapWater1,
             'tapWater2' => $tapWater2,
             'tapWater3' => $tapWater3,
@@ -221,6 +242,3 @@ if ($user == null){
 }
 
 
-
-echo $template->render('dashboard');
-exit(0);
