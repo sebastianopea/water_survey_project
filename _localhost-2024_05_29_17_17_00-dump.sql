@@ -35,7 +35,7 @@ CREATE TABLE `answers` (
   CONSTRAINT `question_Id` FOREIGN KEY (`question_Id`) REFERENCES `questions` (`id`),
   CONSTRAINT `survey_Id` FOREIGN KEY (`survey_Id`) REFERENCES `survey` (`id`),
   CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,6 +44,7 @@ CREATE TABLE `answers` (
 
 LOCK TABLES `answers` WRITE;
 /*!40000 ALTER TABLE `answers` DISABLE KEYS */;
+INSERT INTO `answers` VALUES (1,1,7,'Torbole Casaglia',12),(2,1,1,'Poor',12),(3,1,2,'Unusual taste,Unusual odor',12),(4,1,3,'Always',12),(5,1,4,'Yes',12),(6,1,5,'Mechanical',12),(7,1,6,'The colour of the water is brown',12);
 /*!40000 ALTER TABLE `answers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,8 +61,8 @@ CREATE TABLE `options` (
   `questionId` int(10) unsigned DEFAULT NULL,
   `optionText` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `surveyId` (`surveyId`),
   KEY `questionId` (`questionId`),
+  KEY `surveyId` (`surveyId`),
   CONSTRAINT `questionId_fk` FOREIGN KEY (`questionId`) REFERENCES `questions` (`id`),
   CONSTRAINT `surveyId_fk` FOREIGN KEY (`surveyId`) REFERENCES `survey` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -90,11 +91,11 @@ CREATE TABLE `questions` (
   `questionText` varchar(100) DEFAULT NULL,
   `questionType` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `surveyId` (`surveyId`),
   KEY `questionType_id` (`questionType`),
+  KEY `surveyId` (`surveyId`),
   CONSTRAINT `questionType_id` FOREIGN KEY (`questionType`) REFERENCES `typeofquestion` (`id`),
   CONSTRAINT `surveyId` FOREIGN KEY (`surveyId`) REFERENCES `survey` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -120,7 +121,7 @@ CREATE TABLE `survey` (
   `description` varchar(255) DEFAULT NULL,
   `creationDate` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -134,6 +135,33 @@ INSERT INTO `survey` VALUES (1,'Water Quality Survey','Survey on the quality of 
 UNLOCK TABLES;
 
 --
+-- Table structure for table `temporany_code`
+--
+
+DROP TABLE IF EXISTS `temporany_code`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `temporany_code` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id_user` int(10) unsigned DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `time` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_user` (`id_user`),
+  CONSTRAINT `id_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `temporany_code`
+--
+
+LOCK TABLES `temporany_code` WRITE;
+/*!40000 ALTER TABLE `temporany_code` DISABLE KEYS */;
+/*!40000 ALTER TABLE `temporany_code` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `typeofquestion`
 --
 
@@ -144,7 +172,7 @@ CREATE TABLE `typeofquestion` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `type` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -173,7 +201,7 @@ CREATE TABLE `user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -182,7 +210,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('riccardo','poli','poli','poli@azienda.com','2024-05-17',11,'$2y$10$vnMOura6hIDbCK1ElTqm4ek3jsHnIjhRinLklkcrWJwgoLVUCJA9y');
+INSERT INTO `user` VALUES ('riccardo','poli','poli','blazycube24@gmail.com','2024-05-22',12,'$2y$10$wJyf0Cq0Tet2xxsvHbkXR.RVSQWUH3s8DPXR.f6fzkLEfZpyS140S');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -195,4 +223,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-27 12:13:21
+-- Dump completed on 2024-05-29 17:17:01

@@ -165,7 +165,7 @@ if (isset($_POST)){
             exit(0);
         } else {
             echo $template->render('recover_password', [
-                'error' => 'Email not found.'
+                'error' => true
             ]);
             exit(0);
         }
@@ -175,14 +175,13 @@ if (isset($_POST)){
         $number = $_POST['verify_code_number'];
         $email = $_POST['verify_code_email'];
         $userInfo = UserRepository::getUserFromMail($email);
-        var_dump($number);
         if (VerifyCodeRepository::checkCode($userInfo['id'], $number)) {
             echo $template->render('new_password', [
                 'email' => $email
             ]);
         } else {
             echo $template->render('verify_code', [
-                'error' => 'Invalid verification code.',
+                'error' => true,
                 'email' => $email
             ]);
         }
@@ -202,7 +201,7 @@ if (isset($_POST)){
         }
         UserRepository::changePassword($email, $password);
         echo $template->render('login', [
-            'message' => 'Password successfully changed.'
+            'changed' => true
         ]);
         exit(0);
     }

@@ -15,11 +15,11 @@ class SendMail
     //in modo che possa essere usato per inviare mail
     //da un'applicazione PHP
     //https://stackoverflow.com/questions/76186516/im-trying-to-make-phpmailer-work-but-it-keeps-giving-me-the-smtp-error-could-n
-    const PASSWORD_MAIL = '';
+    const PASSWORD_MAIL = 'npzcxgwfighdfkpk';
     public static function sendMailToRecoverPassword($message, $emailDest, $username):bool{
         $mail = new PHPMailer();
         $mail->isSMTP();
-        $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+        $mail->SMTPDebug = SMTP::DEBUG_OFF; // Disabilita il debug sulla console
         $mail->Host = 'smtp.gmail.com';
         $mail->Port = 465;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
