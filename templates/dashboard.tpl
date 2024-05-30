@@ -211,9 +211,7 @@ $isSolved1 = isset($isSolved1) ? $isSolved1 : false;
             <h2 class="text-3xl font-bold sm:text-4xl">Here is the result of our surveys</h2>
 
             <p class="mt-4 text-gray-300">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur aliquam doloribus
-                nesciunt eos fugiat. Vitae aperiam fugit consequuntur saepe laborum.
-            </p>
+                Here are some insights from our community regarding the quality of tap water in their area.            </p>
         </div>
 
         <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -221,18 +219,15 @@ $isSolved1 = isset($isSolved1) ? $isSolved1 : false;
                     class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
             >
                 <div id="content">
-                    <div hidden="hidden">
-                        <p id="tap1"><?=$tapWater1?></p>
-                    </div>
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-10">
-                                <div id="chart"></div>
+                                <div id="chart0"></div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <h2 class="mt-4 text-xl font-bold text-white">Digital campaigns</h2>
+                <h2 class="mt-4 text-xl font-bold text-white">Domanda 1</h2>
 
                 <p class="mt-1 text-sm text-gray-300">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci
@@ -243,10 +238,6 @@ $isSolved1 = isset($isSolved1) ? $isSolved1 : false;
             <div
                     class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
             >
-
-                <div hidden="hidden">
-                    <p id="tap2"><?=$tapWater2?></p>
-                </div>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-10">
@@ -254,138 +245,55 @@ $isSolved1 = isset($isSolved1) ? $isSolved1 : false;
                         </div>
                     </div>
                 </div>
-                <h2 class="mt-4 text-xl font-bold text-white">Digital campaigns</h2>
+                <h2 class="mt-4 text-xl font-bold text-white">Domanda 2</h2>
 
                 <p class="mt-1 text-sm text-gray-300">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci
                     distinctio alias voluptatum blanditiis laudantium.
                 </p>
             </div>
-
-            <a
+            <div
                     class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
-                    href="#"
             >
-                <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="size-10 text-pink-500"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                >
-                    <path d="M12 14l9-5-9-5-9 5 9 5z" />
-                    <path
-                            d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
-                    />
-                    <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
-                    />
-                </svg>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div id="chart2"></div>
+                        </div>
+                    </div>
+                </div>
 
-                <h2 class="mt-4 text-xl font-bold text-white">Digital campaigns</h2>
+
+
+                <h2 class="mt-4 text-xl font-bold text-white">Domanda 3</h2>
 
                 <p class="mt-1 text-sm text-gray-300">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci
                     distinctio alias voluptatum blanditiis laudantium.
                 </p>
-            </a>
-
-            <a
+            </div>
+            <div
                     class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
-                    href="#"
             >
-                <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="size-10 text-pink-500"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                >
-                    <path d="M12 14l9-5-9-5-9 5 9 5z" />
-                    <path
-                            d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
-                    />
-                    <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
-                    />
-                </svg>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div id="chart3"></div>
+                        </div>
+                    </div>
+                </div>
 
-                <h2 class="mt-4 text-xl font-bold text-white">Digital campaigns</h2>
+
+
+                <h2 class="mt-4 text-xl font-bold text-white">Domanda 4</h2>
 
                 <p class="mt-1 text-sm text-gray-300">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci
                     distinctio alias voluptatum blanditiis laudantium.
                 </p>
-            </a>
-
-            <a
-                    class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
-                    href="#"
-            >
-                <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="size-10 text-pink-500"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                >
-                    <path d="M12 14l9-5-9-5-9 5 9 5z" />
-                    <path
-                            d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
-                    />
-                    <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
-                    />
-                </svg>
-
-                <h2 class="mt-4 text-xl font-bold text-white">Digital campaigns</h2>
-
-                <p class="mt-1 text-sm text-gray-300">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci
-                    distinctio alias voluptatum blanditiis laudantium.
-                </p>
-            </a>
-
-            <a
-                    class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
-                    href="#"
-            >
-                <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="size-10 text-pink-500"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                >
-                    <path d="M12 14l9-5-9-5-9 5 9 5z" />
-                    <path
-                            d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
-                    />
-                    <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
-                    />
-                </svg>
-
-                <h2 class="mt-4 text-xl font-bold text-white">Digital campaigns</h2>
-
-                <p class="mt-1 text-sm text-gray-300">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci
-                    distinctio alias voluptatum blanditiis laudantium.
-                </p>
-            </a>
+            </div>
         </div>
+
 
         <div class="mt-12 text-center">
             <a
@@ -398,19 +306,30 @@ $isSolved1 = isset($isSolved1) ? $isSolved1 : false;
     </div>
 </section>
 
-
 <script>
     function scrollToContent(event) {
         event.preventDefault();
         document.getElementById('content').scrollIntoView({ behavior: 'smooth' });
     }
+    var survey1 = [];
+    survey1 = JSON.parse('<?php echo json_encode($survey1, JSON_UNESCAPED_UNICODE); ?>');
+    console.log(survey1);
+    let tap1 = [];
+    tap1 = survey1['tap1'];
+    let tap2 = [];
+    tap2 = survey1['tap2'];
+    let tap3 = [];
+    tap3 = survey1['tap3'];
+    let tap4 = [];
+    tap4 = survey1['tap4'];
+    console.log(tap2);
     let options = {
-        series: [44, 55, 13, 43, 22],
+        series: Object.values(survey1['tap1']),
         chart: {
-            width: 380,
             type: 'pie',
+            height: 350
         },
-        labels: ['Excellent', 'Good', 'Fair', 'Poor'],
+        labels: [],
         responsive: [{
             breakpoint: 480,
             options: {
@@ -424,12 +343,12 @@ $isSolved1 = isset($isSolved1) ? $isSolved1 : false;
         }]
     };
     let options1 = {
-        series: [44, 55, 13, 43, 22],
+        series: Object.values(survey1['tap2']),
         chart: {
-            width: 380,
             type: 'pie',
+            height: 350
         },
-        labels: ['Excellent', 'Good', 'Fair', 'Poor'],
+        labels: [],
         responsive: [{
             breakpoint: 480,
             options: {
@@ -442,10 +361,66 @@ $isSolved1 = isset($isSolved1) ? $isSolved1 : false;
             }
         }]
     };
-    var chart = new ApexCharts(document.querySelector("#chart"), options);
-    var chart1 = new ApexCharts(document.querySelector("#chart1"), options1);
+    let options2 = {
+        series: Object.values(survey1['tap3']),
+        chart: {
+            type: 'pie',
+            height: 350
+        },
+        labels: [],
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 200
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    };
+    let options3 = {
+        series: Object.values(survey1['tap4']),
+        chart: {
+            type: 'pie',
+            height: 350
+        },
+        labels: [],
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 200
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    };
+
+    for (let key in tap1) {
+        options.labels.push(key);
+    }
+    chart = new ApexCharts(document.querySelector("#chart0"), options);
     chart.render();
-    chart1.render();
+    for (let key in tap2) {
+        options1.labels.push(key);
+    }
+    chart = new ApexCharts(document.querySelector("#chart1"), options1);
+    chart.render();
+    for (let key in tap3) {
+        options2.labels.push(key);
+    }
+    chart = new ApexCharts(document.querySelector("#chart2"), options2);
+    chart.render();
+    for (let key in tap4) {
+        options3.labels.push(key);
+    }
+    chart = new ApexCharts(document.querySelector("#chart3"), options3);
+    chart.render();
 </script>
+
 </body>
 </html>

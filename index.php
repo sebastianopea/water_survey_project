@@ -13,6 +13,24 @@ use Util\SendMail;
 
 $template = new Engine('templates','tpl');
 $name = $surname = $username = $email = $password = $dateOfBirth = $tapWater1 = $tapWater2 = $tapWater3 = $filtrationSystem1 = $filtrationSystem2 = null;
+$tapWater1['Excellent'] = SurveyRepository::countNumAnswers(1,1, 'Excellent');
+$tapWater1['Good'] = SurveyRepository::countNumAnswers(1,1, 'Good');
+$tapWater1['Fair'] = SurveyRepository::countNumAnswers(1,1, 'Fair');
+$tapWater1['Poor'] = SurveyRepository::countNumAnswers(1,1, 'Poor');
+$tapWater2['UnusualTaste'] = SurveyRepository::countNumAnswers(1,2, 'Unusual taste');
+$tapWater2['UnusualOdor'] = SurveyRepository::countNumAnswers(1,2, 'Unusual odor');
+$tapWater2['NoIssues'] = SurveyRepository::countNumAnswers(1,2, 'No issues');
+$tapWater3['Always'] = SurveyRepository::countNumAnswers(1,3, 'Always');
+$tapWater3['Often'] = SurveyRepository::countNumAnswers(1,3, 'Often');
+$tapWater3['Sometimes'] = SurveyRepository::countNumAnswers(1,3, 'Sometimes');
+$tapWater3['Rarely'] = SurveyRepository::countNumAnswers(1,3, 'Rarely');
+$tapWater3['Never'] = SurveyRepository::countNumAnswers(1,3, 'Never');
+$filtrationSystem1['Yes'] = SurveyRepository::countNumAnswers(1,4, 'Yes');
+$filtrationSystem1['No'] = SurveyRepository::countNumAnswers(1,4, 'No');
+$survey1['tap1'] = $tapWater1;
+$survey1['tap2'] = $tapWater2;
+$survey1['tap3'] = $tapWater3;
+$survey1['tap4'] = $filtrationSystem1;
 
 
 
@@ -146,11 +164,7 @@ if (isset($_POST)){
             'displayedName' => $displayed_name,
             'isSolved' => $isSolved,
             'isSolved1' => $isSolved1,
-            'tapWater1' => $tapWater1,
-            'tapWater2' => $tapWater2,
-            'tapWater3' => $tapWater3,
-            'filtrationSystem1' => $filtrationSystem1,
-            'filtrationSystem2' => $filtrationSystem2,
+            'survey1' => $survey1,
         ]);
         exit(0);
     }
@@ -161,11 +175,7 @@ if (isset($_POST)){
             'displayedName' => $displayed_name,
             'isSolved' => $isSolved,
             'isSolved1' => $isSolved1,
-            'tapWater1' => $tapWater1,
-            'tapWater2' => $tapWater2,
-            'tapWater3' => $tapWater3,
-            'filtrationSystem1' => $filtrationSystem1,
-            'filtrationSystem2' => $filtrationSystem2,
+            'survey1' => $survey1,
         ]);
         exit(0);
     }
@@ -232,11 +242,7 @@ if ($user == null){
         ,[
             'isSolved' => false,
             'isSolved1' => false,
-            'tapWater1' => $tapWater1,
-            'tapWater2' => $tapWater2,
-            'tapWater3' => $tapWater3,
-            'filtrationSystem1' => $filtrationSystem1,
-            'filtrationSystem2' => $filtrationSystem2,
+            'survey1' => $survey1,
         ]);
     exit(0);
 }
