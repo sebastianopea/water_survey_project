@@ -50,8 +50,12 @@ $isSolved1 = isset($isSolved1) ? $isSolved1 : false;
 
         <div class="flex items-center">
             <div class="sm:flex sm:gap-4">
+                <?php if (!isset($displayedName) && empty($displayedName)): ?>
                 <!-- Bottone "Login" -->
                 <a class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700" href="index.php?login">Login</a>
+                <?php else: ?>
+                <a class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700" href="index.php?action=logout">Logout</a>
+                <?php endif; ?>
                 <!-- Bottone "Register" -->
                 <a class="block rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block" href="index.php?signUp">Register</a>
             </div>
@@ -79,9 +83,7 @@ $isSolved1 = isset($isSolved1) ? $isSolved1 : false;
             <span class="absolute inset-0 border-2 border-dashed border-black"></span>
             <div class="relative flex h-full transform items-end border-2 border-black bg-white transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
                 <div class="p-2 sm:p-4 lg:p-6 !pt-0 transition-opacity group-hover:absolute group-hover:opacity-0 sm:p-6 lg:p-8">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="size-8 sm:size-10">
-                        <path d="M46.84 5.32l-4.16-4.16a4 4 0 0 0-5.58 0C1.7 36.55 3.65 34.52 3.53 34.88S3 36.78 0 46.72A1 1 0 0 0 1 48c.21 0 12.08-3.45 12.39-3.68s-2.75 2.79 33.45-33.42a4 4 0 0 0 0-5.58zM35 6.05l7 6.95-1.37 1.37-6.97-6.95zM10.45 38.91l-1-.34-.34-1L35 11.61l1.39 1.39zm21.8-30.08l1.36 1.37L7.79 36l-1.71-1 24.16-24.18zm-6.13 2.94l-2-1.23-1.16 3.94a9.88 9.88 0 0 0 3.43 3.43l2-1.23c-2.56-.86-2.06-.36-2.94-2.94zm10.55-1.15l-1-1.71-25.8 25.82 1.37 1.36zm5.43-1.43l-2.07 2.07-6.92-6.92 2.07-2.07a1.94 1.94 0 0 1 2.75 0l4.17 4.17a1.94 1.94 0 0 1 0 2.75z"/>
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" id="Filled" viewBox="0 0 24 24" width="50" height="50"><path d="M1.172,19.119A4,4,0,0,0,0,21.947V24H2.053a4,4,0,0,0,2.828-1.172L18.224,9.485,14.515,5.776Z"/><path d="M23.145.855a2.622,2.622,0,0,0-3.71,0L15.929,4.362l3.709,3.709,3.507-3.506A2.622,2.622,0,0,0,23.145.855Z"/></svg>
                     <h2 class="mt-2 text-base font-medium sm:text-xl">Compile our survey</h2>
                 </div>
                 <div class="absolute p-2 sm:p-4 lg:p-6 opacity-0 transition-opacity group-hover:relative group-hover:opacity-100 sm:p-6 lg:p-8">
@@ -119,18 +121,15 @@ $isSolved1 = isset($isSolved1) ? $isSolved1 : false;
             <span class="absolute inset-0 border-2 border-dashed border-black"></span>
             <div class="relative flex h-full transform items-end border-2 border-black bg-white transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
                 <div class="p-2 sm:p-4 lg:p-6 !pt-0 transition-opacity group-hover:absolute group-hover:opacity-0 sm:p-6 lg:p-8">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="size-8 sm:size-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                    <h2 class="mt-2 text-base font-medium sm:text-xl">Go around the world</h2>
+                    <svg xmlns="http://www.w3.org/2000/svg" id="Filled" viewBox="0 0 24 24" width="50" height="50"><path d="M1.172,19.119A4,4,0,0,0,0,21.947V24H2.053a4,4,0,0,0,2.828-1.172L18.224,9.485,14.515,5.776Z"/><path d="M23.145.855a2.622,2.622,0,0,0-3.71,0L15.929,4.362l3.709,3.709,3.507-3.506A2.622,2.622,0,0,0,23.145.855Z"/></svg>
+                    <h2 class="mt-2 text-base font-medium sm:text-xl">Compile our survey</h2>
                 </div>
                 <div class="absolute p-2 sm:p-4 lg:p-6 opacity-0 transition-opacity group-hover:relative group-hover:opacity-100 sm:p-6 lg:p-8">
-                    <h3 class="mt-2 text-base font-medium sm:text-xl">Go around the world</h3>
+                    <h3 class="mt-2 text-base font-medium sm:text-xl">Compile our survey</h3>
                     <p class="mt-2 text-xs sm:text-sm">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, praesentium voluptatem
-                        omnis atque culpa repellendus.
+                        Here you can compile a survey regarding the importance of water bodies in your opinion.
                     </p>
-                    <p class="mt-4 text-xs font-bold">Read more</p>
+                    <p class="mt-4 text-xs font-bold">Go to survey</p>
                 </div>
 
                 <div class="absolute bottom-2 right-2">
@@ -230,8 +229,7 @@ $isSolved1 = isset($isSolved1) ? $isSolved1 : false;
                 <h2 class="mt-4 text-xl font-bold text-white">Domanda 1</h2>
 
                 <p class="mt-1 text-sm text-gray-300">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci
-                    distinctio alias voluptatum blanditiis laudantium.
+                    How would you rate the overall quality of the tap water in your area?
                 </p>
             </div>
 
@@ -248,8 +246,7 @@ $isSolved1 = isset($isSolved1) ? $isSolved1 : false;
                 <h2 class="mt-4 text-xl font-bold text-white">Domanda 2</h2>
 
                 <p class="mt-1 text-sm text-gray-300">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci
-                    distinctio alias voluptatum blanditiis laudantium.
+                    Have you noticed any unusual taste or odor in the tap water?
                 </p>
             </div>
             <div
@@ -268,8 +265,7 @@ $isSolved1 = isset($isSolved1) ? $isSolved1 : false;
                 <h2 class="mt-4 text-xl font-bold text-white">Domanda 3</h2>
 
                 <p class="mt-1 text-sm text-gray-300">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci
-                    distinctio alias voluptatum blanditiis laudantium.
+                    How frequently do you use tap water for drinking?
                 </p>
             </div>
             <div
@@ -288,22 +284,116 @@ $isSolved1 = isset($isSolved1) ? $isSolved1 : false;
                 <h2 class="mt-4 text-xl font-bold text-white">Domanda 4</h2>
 
                 <p class="mt-1 text-sm text-gray-300">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci
-                    distinctio alias voluptatum blanditiis laudantium.
+                    Do you use any water filtration systems at home?
                 </p>
             </div>
         </div>
 
 
         <div class="mt-12 text-center">
-            <a
-                    href="#"
-                    class="inline-block rounded bg-pink-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-pink-700 focus:outline-none focus:ring focus:ring-yellow-400"
+            <p class="mt-4 text-gray-300">
+                Here you can see the result of our survey regarding the importance of water bodies.            </p>
+        </div>
+        <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <div
+                    class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
             >
-                Get Started Today
-            </a>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div id="chart4"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <h2 class="mt-4 text-xl font-bold text-white">Domanda 1</h2>
+
+                <p class="mt-1 text-sm text-gray-300">
+                    How often do you visit natural water bodies (e.g., lakes, rivers, oceans)?
+                </p>
+            </div>
+            <div
+                    class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
+            >
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div id="chart5"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <h2 class="mt-4 text-xl font-bold text-white">Domanda 2</h2>
+
+                <p class="mt-1 text-sm text-gray-300">
+                    How important do you think it is to conserve natural water bodies?
+                </p>
+            </div>
+            <div
+                    class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
+            >
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div id="chart6"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <h2 class="mt-4 text-xl font-bold text-white">Domanda 3</h2>
+
+                <p class="mt-1 text-sm text-gray-300">
+                    Have you participated in any water conservation activities?
+                </p>
+            </div>
+            <div
+                    class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
+            >
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div id="chart7"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <h2 class="mt-4 text-xl font-bold text-white">Domanda 4</h2>
+
+                <p class="mt-1 text-sm text-gray-300">
+                    If yes, what type of activities have you participated in?
+                </p>
+            </div>
+            <div
+                    class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
+            >
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div id="chart8"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <h2 class="mt-4 text-xl font-bold text-white">Domanda 5</h2>
+
+                <p class="mt-1 text-sm text-gray-300">
+                    Do you think pollution is a major problem for our water bodies?
+                </p>
+            </div>
         </div>
     </div>
+
+
 </section>
 
 <script>
@@ -313,7 +403,8 @@ $isSolved1 = isset($isSolved1) ? $isSolved1 : false;
     }
     var survey1 = [];
     survey1 = JSON.parse('<?php echo json_encode($survey1, JSON_UNESCAPED_UNICODE); ?>');
-    console.log(survey1);
+    survey2 = JSON.parse('<?php echo json_encode($survey2, JSON_UNESCAPED_UNICODE); ?>');
+
     let tap1 = [];
     tap1 = survey1['tap1'];
     let tap2 = [];
@@ -322,71 +413,38 @@ $isSolved1 = isset($isSolved1) ? $isSolved1 : false;
     tap3 = survey1['tap3'];
     let tap4 = [];
     tap4 = survey1['tap4'];
-    console.log(tap2);
-    let options = {
-        series: Object.values(survey1['tap1']),
+
+    let nat1 = [];
+    nat1 = survey2['nat1'];
+    let nat2 = [];
+    nat2 = survey2['nat2'];
+    let nat3 = [];
+    nat3 = survey2['nat3'];
+    let nat4 = [];
+    nat4 = survey2['nat4'];
+    let nat5 = [];
+    nat5 = survey2['nat5'];
+    console.log(nat4);
+
+    // Definizione dei nomi dei grafici e relativi dati
+    const chartsData = [
+        { id: 'chart0', data: survey1['tap1'] },
+        { id: 'chart1', data: survey1['tap2'] },
+        { id: 'chart2', data: survey1['tap3'] },
+        { id: 'chart3', data: survey1['tap4'] },
+        { id: 'chart4', data: survey2['nat1'] },
+        { id: 'chart5', data: survey2['nat2'] },
+        { id: 'chart6', data: survey2['nat3'] },
+        { id: 'chart7', data: survey2['nat4'] },
+        { id: 'chart8', data: survey2['nat5'] }
+    ];
+
+    // Configurazione comune per tutti i grafici
+    const commonOptions = {
         chart: {
             type: 'pie',
             height: 350
         },
-        labels: [],
-        responsive: [{
-            breakpoint: 480,
-            options: {
-                chart: {
-                    width: 200
-                },
-                legend: {
-                    position: 'bottom'
-                }
-            }
-        }]
-    };
-    let options1 = {
-        series: Object.values(survey1['tap2']),
-        chart: {
-            type: 'pie',
-            height: 350
-        },
-        labels: [],
-        responsive: [{
-            breakpoint: 480,
-            options: {
-                chart: {
-                    width: 200
-                },
-                legend: {
-                    position: 'bottom'
-                }
-            }
-        }]
-    };
-    let options2 = {
-        series: Object.values(survey1['tap3']),
-        chart: {
-            type: 'pie',
-            height: 350
-        },
-        labels: [],
-        responsive: [{
-            breakpoint: 480,
-            options: {
-                chart: {
-                    width: 200
-                },
-                legend: {
-                    position: 'bottom'
-                }
-            }
-        }]
-    };
-    let options3 = {
-        series: Object.values(survey1['tap4']),
-        chart: {
-            type: 'pie',
-            height: 350
-        },
-        labels: [],
         responsive: [{
             breakpoint: 480,
             options: {
@@ -400,26 +458,22 @@ $isSolved1 = isset($isSolved1) ? $isSolved1 : false;
         }]
     };
 
-    for (let key in tap1) {
-        options.labels.push(key);
+    // Funzione per generare le opzioni del grafico
+    function generateChartOptions(series) {
+        return {
+            ...commonOptions,
+            series: Object.values(series),
+            labels: Object.keys(series)
+        };
     }
-    chart = new ApexCharts(document.querySelector("#chart0"), options);
-    chart.render();
-    for (let key in tap2) {
-        options1.labels.push(key);
-    }
-    chart = new ApexCharts(document.querySelector("#chart1"), options1);
-    chart.render();
-    for (let key in tap3) {
-        options2.labels.push(key);
-    }
-    chart = new ApexCharts(document.querySelector("#chart2"), options2);
-    chart.render();
-    for (let key in tap4) {
-        options3.labels.push(key);
-    }
-    chart = new ApexCharts(document.querySelector("#chart3"), options3);
-    chart.render();
+
+    // Creazione dei grafici utilizzando i dati forniti
+    chartsData.forEach((chartData) => {
+        const options = generateChartOptions(chartData.data);
+        const chart = new ApexCharts(document.querySelector(`#${chartData.id}`), options);
+        chart.render();
+    });
+
 </script>
 
 </body>
