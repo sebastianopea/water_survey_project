@@ -3,13 +3,22 @@
         'name' => 'vendor_name/template_pdo_crud',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'db6e75d5bc719292f86ab48dcabe054b7b607852',
+        'reference' => 'c2ae159ff4198c6a4ca7bbba49a773279e633035',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
+        'coreui/coreui' => array(
+            'pretty_version' => 'v5.0.2',
+            'version' => '5.0.2.0',
+            'reference' => '98e192d20f5219817adbc3791f65ac1434836f71',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../coreui/coreui',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'league/plates' => array(
             'pretty_version' => 'v3.5.0',
             'version' => '3.5.0.0',
@@ -31,7 +40,7 @@
         'vendor_name/template_pdo_crud' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'db6e75d5bc719292f86ab48dcabe054b7b607852',
+            'reference' => 'c2ae159ff4198c6a4ca7bbba49a773279e633035',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
